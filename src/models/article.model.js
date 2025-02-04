@@ -7,7 +7,8 @@ const articleSchema = new mongoose.Schema({
     imageUrl: String,
     category: String,
     publishedAt: String,
-    author: String
+    author: String,
+    readTime: Number
 });
 
 module.exports = mongoose.model('Article', articleSchema);
