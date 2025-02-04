@@ -19,21 +19,21 @@ async function getAllArticles() {
  * Get article by ID.
  */
 async function getArticleById(articleId) {
-    return await Article.findOne({ id: articleId });
+    return await Article.findById(articleId );
 }
 
 /**
  * Update article by ID.
  */
 async function updateArticle(articleId, updateData) {
-    return await Article.findOneAndUpdate({ id: articleId }, updateData, { new: true });
+    return await Article.findOneAndUpdate({ _id: articleId }, updateData, { new: true });
 }
 
 /**
  * Delete article by ID.
  */
 async function deleteArticle(articleId) {
-    return await Article.findOneAndDelete({ id: articleId });
+    return await Article.findOneAndDelete({ _id: articleId });
 }
 
 module.exports = {

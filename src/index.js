@@ -8,7 +8,7 @@ exports.handler = async (event) => {
     await connectToDatabase(process.env.MONGODB_URI);
 
     // 2. Extraire les infos de la requête
-    const httpMethod = event.requestContext.httpMethod;
+    const httpMethod = event.requestContext.http.method;
     const path = event.requestContext.http.path;
 
     let body;
