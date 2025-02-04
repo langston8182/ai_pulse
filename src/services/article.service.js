@@ -1,0 +1,45 @@
+const Article = require('../models/article.model');
+
+/**
+ * Create a new article.
+ */
+async function createArticle(articleData) {
+    const article = new Article(articleData);
+    return await article.save();
+}
+
+/**
+ * Get all articles.
+ */
+async function getAllArticles() {
+    return await Article.find({});
+}
+
+/**
+ * Get article by ID.
+ */
+async function getArticleById(articleId) {
+    return await Article.findOne({ id: articleId });
+}
+
+/**
+ * Update article by ID.
+ */
+async function updateArticle(articleId, updateData) {
+    return await Article.findOneAndUpdate({ id: articleId }, updateData, { new: true });
+}
+
+/**
+ * Delete article by ID.
+ */
+async function deleteArticle(articleId) {
+    return await Article.findOneAndDelete({ id: articleId });
+}
+
+module.exports = {
+    createArticle,
+    getAllArticles,
+    getArticleById,
+    updateArticle,
+    deleteArticle
+};
