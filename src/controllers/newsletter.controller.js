@@ -8,7 +8,7 @@ const {
 /**
  * Contrôleur pour router la requête selon la méthode et le chemin.
  */
-async function newsletterController(httpMethod, path, body) {
+async function newsletterController(httpMethod, path, body, queryParams) {
     if (httpMethod === 'GET' && path === '/newsletter') {
         const newsletters = await getAllNewsletter();
         return { statusCode: 200, body: JSON.stringify(newsletters) };
@@ -35,7 +35,13 @@ async function newsletterController(httpMethod, path, body) {
         if (!deleted) {
             return { statusCode: 404, body: JSON.stringify({ message: 'Not found' }) };
         }
-        return { statusCode: 200, body: JSON.stringify({ message: 'Deleted' }) };
+        return {
+            statusCode: 302,
+            headers: {
+                Location: 'http://localhost:5173/unsubscribe'
+            },
+            body: JSON.stringify({ message: 'Deleted' })
+        };
     }
 
     // Route par défaut

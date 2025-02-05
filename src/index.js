@@ -24,7 +24,7 @@ exports.handler = async (event) => {
     if (path.startsWith('/article')) {
         result = await articleController(httpMethod, path, body);
     } else if (path.startsWith('/newsletter')) {
-        result = await newsletterController(httpMethod, path, body);
+        result = await newsletterController(httpMethod, path, body, event.queryStringParameters);
     } else {
         result = {
             statusCode: 404,
@@ -36,6 +36,7 @@ exports.handler = async (event) => {
     return {
         ...result,
         headers: {
+            ...result.headers,  // On récupère tous les headers de result (dont Location)
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
         }

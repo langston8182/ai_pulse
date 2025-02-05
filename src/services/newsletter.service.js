@@ -31,5 +31,6 @@ async function unsubscribeNewsletter(email, token) {
 module.exports = {
     createNewsletter,
     getAllNewsletter,
-    deleteNewsletter
+    deleteNewsletter,
+    unsubscribeNewsletter
 };
