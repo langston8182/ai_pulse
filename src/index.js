@@ -1,5 +1,6 @@
 const { connectToDatabase } = require('./db');
 const { articleController } = require('./controllers/article.controller');
+const { newsletterController } = require('./controllers/newsletter.controller');
 
 exports.handler = async (event) => {
     console.log('Incoming event:', JSON.stringify(event, null, 2));
@@ -18,8 +19,18 @@ exports.handler = async (event) => {
         body = {};
     }
 
-    // 3. Appeler le contrôleur
-    const result = await articleController(httpMethod, path, body);
+    // 3. Appeler le contrôleur approprié en fonction du chemin
+    let result;
+    if (path.startsWith('/article')) {
+        result = await articleController(httpMethod, path, body);
+    } else if (path.startsWith('/newsletter')) {
+        result = await newsletterController(httpMethod, path, body);
+    } else {
+        result = {
+            statusCode: 404,
+            body: JSON.stringify({ message: 'Not Found' }),
+        };
+    }
 
     // 4. Retourner la réponse
     return {
