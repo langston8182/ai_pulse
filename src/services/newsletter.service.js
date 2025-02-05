@@ -21,6 +21,13 @@ async function deleteNewsletter(email) {
     return await Newsletter.findOneAndDelete({ email: email });
 }
 
+/**
+ * Unsubscribe a newsletter by email and token.
+ */
+async function unsubscribeNewsletter(email, token) {
+    return await Newsletter.findOneAndDelete({ email: email, token: token });
+}
+
 module.exports = {
     createNewsletter,
     getAllNewsletter,

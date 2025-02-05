@@ -1,7 +1,8 @@
 const {
     createNewsletter,
     getAllNewsletter,
-    deleteNewsletter
+    deleteNewsletter,
+    unsubscribeNewsletter
 } = require('../services/newsletter.service');
 
 /**
@@ -21,6 +22,16 @@ async function newsletterController(httpMethod, path, body) {
     if (httpMethod === 'DELETE' && path.startsWith('/newsletter/')) {
         const email = path.split('/').pop();
         const deleted = await deleteNewsletter(email);
+        if (!deleted) {
+            return { statusCode: 404, body: JSON.stringify({ message: 'Not found' }) };
+        }
+        return { statusCode: 200, body: JSON.stringify({ message: 'Deleted' }) };
+    }
+
+    if (httpMethod === 'GET' && path === '/newsletter/unsubscribe') {
+        const email = queryParams?.email;
+        const token = queryParams?.token;
+        const deleted = await unsubscribeNewsletter(email, token);
         if (!deleted) {
             return { statusCode: 404, body: JSON.stringify({ message: 'Not found' }) };
         }
