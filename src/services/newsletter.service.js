@@ -18,7 +18,7 @@ async function getAllNewsletter() {
  * Delete a newsletter by email.
  */
 async function deleteNewsletter(email) {
-    return await Article.findOneAndDelete({ email: email });
+    return await Newsletter.findOneAndDelete({ email: email });
 }
 
 module.exports = {
