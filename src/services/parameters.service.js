@@ -1,4 +1,4 @@
-import { SSMClient, GetParametersByPathCommand } from "@aws-sdk/client-ssm";
+const { SSMClient, GetParametersByPathCommand } = require("@aws-sdk/client-ssm");
 const Parameter = require('../models/parameters.model');
 const ssmClient = new SSMClient({ region: process.env.AWS_REGION || "us-east-1" });
 
@@ -53,3 +53,8 @@ async function updateParameters(parameters) {
 
     return results;
 }
+
+module.exports = {
+    getAllParameters,
+    updateParameters
+};

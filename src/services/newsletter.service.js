@@ -12,20 +12,20 @@ async function createNewsletter(newsletterData) {
  * Get all newsletter email.
  */
 async function getAllNewsletter() {
-    return await Newsletter.find({});
+    return Newsletter.find({});
 }
 /**
  * Delete a newsletter by email.
  */
 async function deleteNewsletter(email) {
-    return await Newsletter.findOneAndDelete({ email: email });
+    return Newsletter.findOneAndDelete({email: email});
 }
 
 /**
  * Unsubscribe a newsletter by email and token.
  */
 async function unsubscribeNewsletter(email, token) {
-    return await Newsletter.findOneAndDelete({ email: email, token: token });
+    return Newsletter.findOneAndDelete({email: email, token: token});
 }
 
 module.exports = {

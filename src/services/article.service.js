@@ -12,28 +12,28 @@ async function createArticle(articleData) {
  * Get all articles.
  */
 async function getAllArticles() {
-    return await Article.find({});
+    return Article.find({});
 }
 
 /**
  * Get article by ID.
  */
 async function getArticleById(articleId) {
-    return await Article.findById(articleId );
+    return Article.findById(articleId);
 }
 
 /**
  * Update article by ID.
  */
 async function updateArticle(articleId, updateData) {
-    return await Article.findOneAndUpdate({ _id: articleId }, updateData, { new: true });
+    return Article.findOneAndUpdate({_id: articleId}, updateData, {new: true});
 }
 
 /**
  * Delete article by ID.
  */
 async function deleteArticle(articleId) {
-    return await Article.findOneAndDelete({ _id: articleId });
+    return Article.findOneAndDelete({_id: articleId});
 }
 
 module.exports = {

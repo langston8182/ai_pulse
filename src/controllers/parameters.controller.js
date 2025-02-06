@@ -1,11 +1,11 @@
 const {
-    getParameters,
+    getAllParameters,
     updateParameters
 } = require('../services/parameters.service');
 
 async function parametersController(httpMethod, path, body) {
     if (httpMethod === 'GET' && path === '/parameters') {
-        const parameters = await getParameters();
+        const parameters = await getAllParameters();
         return {statusCode: 200, body: JSON.stringify(parameters)};
     }
 

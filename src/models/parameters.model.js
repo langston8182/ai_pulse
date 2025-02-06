@@ -4,3 +4,5 @@ export class Parameter {
         this.value = value;
     }
 }
+
+module.exports = { Parameter };
