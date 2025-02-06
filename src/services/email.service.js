@@ -12,6 +12,7 @@ async function sendEmail(emailData) {
         emailData.to,
         emailData.subject,
         emailData.htmlBody,
+        emailData.textBody,
         emailData.bccAddresses
     );
 
@@ -42,6 +43,13 @@ async function sendEmail(emailData) {
     if (emailModel.htmlBody) {
         params.Message.Body.Html = {
             Data: emailModel.htmlBody,
+            Charset: 'UTF-8',
+        };
+    }
+
+    if (emailModel.textBody) {
+        params.Message.Body.Text = {
+            Data: emailModel.textBody,
             Charset: 'UTF-8',
         };
     }
