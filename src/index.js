@@ -3,6 +3,7 @@ const { articleController } = require('./controllers/article.controller');
 const { newsletterController } = require('./controllers/newsletter.controller');
 const { parametersController } = require('./controllers/parameters.controller');
 const { emailController } = require('./controllers/email.controller');
+const { openaiController } = require('./controllers/openai.controller');
 
 exports.handler = async (event) => {
     console.log('Incoming event:', JSON.stringify(event, null, 2));
@@ -31,7 +32,10 @@ exports.handler = async (event) => {
         result = await parametersController(httpMethod, path, body);
     } else if (path.startsWith('/admin/email')) {
         result = await emailController(httpMethod, path, body);
-    } else {
+    } else if (path.startsWith('/admin/openai')) {
+        result = await openaiController(httpMethod, path, body);
+    }
+    else {
         result = {
             statusCode: 404,
             body: JSON.stringify({ message: 'Not Found' }),
