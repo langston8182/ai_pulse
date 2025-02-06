@@ -1,6 +1,6 @@
 const { SSMClient, GetParametersByPathCommand, PutParameterCommand } = require("@aws-sdk/client-ssm");
 const { Parameter } = require('../models/parameters.model');
-const ssmClient = new SSMClient({ region: process.env.AWS_REGION || "us-east-1" });
+const ssmClient = new SSMClient({ region: process.env.AWS_REGION || "eu-west-3" });
 
 /**
  * Get all parameters.

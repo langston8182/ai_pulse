@@ -4,12 +4,12 @@ const {
 } = require('../services/parameters.service');
 
 async function parametersController(httpMethod, path, body) {
-    if (httpMethod === 'GET' && path === '/parameters') {
+    if (httpMethod === 'GET' && path === '/admin/parameters') {
         const parameters = await getAllParameters();
         return {statusCode: 200, body: JSON.stringify(parameters)};
     }
 
-    if (httpMethod === 'PUT' && path === '/parameters') {
+    if (httpMethod === 'PUT' && path === '/admin/parameters') {
         const { parameters } = body
 
         if (!Array.isArray(parameters)) {
