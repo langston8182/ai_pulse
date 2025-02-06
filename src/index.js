@@ -4,6 +4,8 @@ const { newsletterController } = require('./controllers/newsletter.controller');
 const { parametersController } = require('./controllers/parameters.controller');
 const { emailController } = require('./controllers/email.controller');
 const { openaiController } = require('./controllers/openai.controller');
+const { imagesController } = require('./controllers/image.controller');
+
 
 exports.handler = async (event) => {
     console.log('Incoming event:', JSON.stringify(event, null, 2));
@@ -34,6 +36,8 @@ exports.handler = async (event) => {
         result = await emailController(httpMethod, path, body);
     } else if (path.startsWith('/admin/openai')) {
         result = await openaiController(httpMethod, path, body);
+    } else if (path.startsWith('/admin/images')) {
+        result = await imagesController(httpMethod, path, body);
     }
     else {
         result = {
