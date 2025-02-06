@@ -1,5 +1,5 @@
-const { S3Client, ListObjectsV2Command, PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
-const s3 = new S3Client({ region: process.env.AWS_REGION || 'eu-west-3' });
+const {S3Client, ListObjectsV2Command, PutObjectCommand, DeleteObjectCommand} = require("@aws-sdk/client-s3");
+const s3 = new S3Client({region: process.env.AWS_REGION || 'eu-west-3'});
 const BUCKET_NAME = process.env.BUCKET_NAME || 'votre-nom-de-bucket';
 const FOLDER = 'images';
 
@@ -14,7 +14,12 @@ async function listImages() {
     });
     const response = await s3.send(command);
     // Filtre pour ne garder que les objets qui ne se terminent pas par '/'
-    return (response.Contents || []).filter(item => item.Key && !item.Key.endsWith('/'));
+    return (response.Contents || [])
+        .filter(item => item.Key && !item.Key.endsWith('/'))
+        .map(item => ({
+            ...item, // Conserve les champs d'origine : Key, LastModified, Size, etc.
+            url: `https://${BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${item.Key}` // Ajoute l'URL publique
+        }));
 }
 
 /**
@@ -47,4 +52,4 @@ async function deleteImage(fileName) {
     await s3.send(command);
 }
 
-module.exports = { listImages, addImage, deleteImage };
+module.exports = {listImages, addImage, deleteImage};
