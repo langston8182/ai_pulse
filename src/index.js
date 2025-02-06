@@ -1,6 +1,7 @@
 const { connectToDatabase } = require('./db');
 const { articleController } = require('./controllers/article.controller');
 const { newsletterController } = require('./controllers/newsletter.controller');
+const { parametersController } = require('./controllers/parameters.controller');
 
 exports.handler = async (event) => {
     console.log('Incoming event:', JSON.stringify(event, null, 2));
@@ -25,6 +26,8 @@ exports.handler = async (event) => {
         result = await articleController(httpMethod, path, body);
     } else if (path.startsWith('/newsletter')) {
         result = await newsletterController(httpMethod, path, body, event.queryStringParameters);
+    } else if (path.startsWith('/parameters')) {
+        result = await parametersController(httpMethod, path, body);
     } else {
         result = {
             statusCode: 404,
